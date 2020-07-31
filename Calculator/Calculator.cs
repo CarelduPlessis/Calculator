@@ -1,195 +1,209 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 namespace Calculator
 {
     public partial class Calculator : Form
     {
-        Double output = 0;
+        double output = 0;
         string oprt = "";
+        bool IsText = false;
+
 
         public Calculator()
         {
             InitializeComponent();
-           
         }
 
         private void Calculator_Load(object sender, EventArgs e)
         {
 
         }
-        private void calTotalValue(object sender) {
-            //int total = 0;
-            Button b1 = (Button)sender;
-            switch (oprt)
-            {
-                case "+":
-                    output = output + Convert.ToInt32(b1.Text);
-                    break;
-                case "*":
-                    output = output * Convert.ToInt32(b1.Text);
-                    break;
-                case "-":
-                    output = output - Convert.ToInt32(b1.Text);
-                    break;
-                case "/":
-                    output = output / Convert.ToDouble(b1.Text);
-                    break;
-                case "":
-                    output = Convert.ToInt32(b1.Text);
-                    break;
+        string num1 = "";
+        string num2 = "";
+        private void calTotalValue(object sender)
+        {
 
+            Button b1 = (Button)sender;
+            string[] oprt1 = { "+", "-", "/", "X" };
+
+            for (int i = 0; i < oprt1.Length; i++)
+            {
+                if (oprt1[i] == b1.Text)
+                {
+                    IsText = true;
+                }
             }
-            Display.Text = output.ToString();
-            oprt = "";
+
+            if (IsText != true)
+            {
+                num1 = num1 + b1.Text;
+            }
+            else
+            {
+                num2 = num2 + b1.Text;
+            }
+
+            int numericCheck = 0;
+
+            bool result = int.TryParse(num2, out numericCheck);
+
+            for (int i = 0; i < oprt1.Length; i++)
+            {
+                if (result)
+                {
+                    switch (oprt)
+                    {
+                        case "+":
+                            output = Convert.ToDouble(num1) + Convert.ToDouble(num2);
+                            break;
+                        case "X":
+                            output = Convert.ToDouble(num1) * Convert.ToDouble(num2);
+                            break;
+                        case "-":
+                            output = Convert.ToDouble(num1) - Convert.ToDouble(num2);
+                            break;
+                        case "/":
+
+                            if (Convert.ToInt32(num2) == 0)
+                            {
+                                MessageBox.Show("can't divide by zero");
+                                i = oprt1.Length;
+                            }
+                            else
+                            {
+                                output = Convert.ToDouble(num1) / Convert.ToDouble(num2);
+                            }
+
+
+                            break;
+                        case "":
+                            output = Convert.ToDouble(b1.Text);
+                            break;
+
+                    }
+
+                }
+                else if (IsText)
+                {
+                    num2 = num2.Replace(oprt, "");
+                }
+            }
+
         }
-    
+
 
         private void Button1_Click(object sender, EventArgs e)
         {
             Display.Text += Button1.Text;
             calTotalValue(sender);
-            /*
-            switch(oprt)
-            {
-                case "+":
-                    output = output + Convert.ToInt32(Button1.Text);
-                    break;
-                case "":
-                    output = Convert.ToInt32(Button1.Text);
-                    break;
-                
-            }*/
-
-            //textBox1.Text = output.ToString();
-
-
-            // var var1 = Convert.ToInt32(Button1.Text);
         }
-        
+
         private void Button2_Click(object sender, EventArgs e)
         {
             Display.Text += Button2.Text;
             calTotalValue(sender);
-            /*
-            switch (oprt)
-            {
-                case "+":
-                    output = output + Convert.ToInt32(Button2.Text);
-                    break;
-                case "":
-                    output = Convert.ToInt32(Button2.Text);
-                    break;
-
-            }*/
-            //textBox1.Text = output.ToString();
-
         }
 
         private void Button3_Click(object sender, EventArgs e)
         {
             Display.Text += Button3.Text;
             calTotalValue(sender);
-            //var var1 = Convert.ToInt32(Button3.Text);
         }
 
         private void Button4_Click(object sender, EventArgs e)
         {
             Display.Text += Button4.Text;
             calTotalValue(sender);
-            //var var1 = Convert.ToInt32(Button4.Text);
         }
 
         private void Button5_Click(object sender, EventArgs e)
         {
             Display.Text += Button5.Text;
             calTotalValue(sender);
-            // var var1 = Convert.ToInt32(Button5.Text);
         }
 
         private void Button6_Click(object sender, EventArgs e)
         {
             Display.Text += Button6.Text;
             calTotalValue(sender);
-            //var var1 = Convert.ToInt32(Button6.Text);
         }
 
         private void Button7_Click(object sender, EventArgs e)
         {
             Display.Text += Button7.Text;
             calTotalValue(sender);
-            //var var1 = Convert.ToInt32(Button7.Text);
         }
 
         private void Button8_Click(object sender, EventArgs e)
         {
             Display.Text += Button8.Text;
             calTotalValue(sender);
-            //var var1 = Convert.ToInt32(Button8.Text);
         }
 
         private void Button9_Click(object sender, EventArgs e)
         {
             Display.Text += Button9.Text;
             calTotalValue(sender);
-            // var var1 = Convert.ToInt32(Button9.Text);
         }
 
         private void Button0_Click(object sender, EventArgs e)
         {
             Display.Text += Button0.Text;
             calTotalValue(sender);
-            //var var1 = Convert.ToInt32(Button0.Text);
         }
 
         private void ButtonPlus_Click(object sender, EventArgs e)
         {
             Display.Text += ButtonPlus.Text;
             oprt = "+";
-           // var var1 = ButtonPlus.Text;
+            calTotalValue(sender);
         }
 
         private void ButtonMultiply_Click(object sender, EventArgs e)
         {
             Display.Text += ButtonMultiply.Text;
-            oprt = "*";
-            // var var1 = ButtonMultiply.Text;
+            oprt = "X";
+            calTotalValue(sender);
         }
 
         private void ButtonMinus_Click(object sender, EventArgs e)
         {
             Display.Text += ButtonMinus.Text;
             oprt = "-";
-            //var var1 = ButtonMinus.Text;
+            calTotalValue(sender);
         }
 
         private void ButtonDivide_Click(object sender, EventArgs e)
         {
             Display.Text += ButtonDivide.Text;
             oprt = "/";
-            //var var1 = ButtonDivide.Text;
+            calTotalValue(sender);
         }
 
         private void ButtonClear_Click(object sender, EventArgs e)
         {
             Display.Clear();
+            num1 = "";
+            num2 = "";
+            IsText = false;
         }
 
         private void ButtonBackSpace_Click(object sender, EventArgs e)
         {
-            
+            if (0 <= Display.Text.Length - 1)
+            {
+                Display.Text = Display.Text.Remove(Display.Text.Length - 1);
+            }
         }
 
-        private void Display_TextChanged(object sender, EventArgs e)
+        private void btnEnter_Click(object sender, EventArgs e)
         {
-
-        }       
+            num1 = "";
+            num2 = "";
+            IsText = false;
+            Display.Text = output.ToString();
+        }
     }
 }

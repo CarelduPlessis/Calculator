@@ -45,6 +45,7 @@
             this.ButtonClear = new System.Windows.Forms.Button();
             this.ButtonBackSpace = new System.Windows.Forms.Button();
             this.Display = new System.Windows.Forms.TextBox();
+            this.btnEnter = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Button1
@@ -199,7 +200,7 @@
             // 
             // ButtonBackSpace
             // 
-            this.ButtonBackSpace.Location = new System.Drawing.Point(129, 410);
+            this.ButtonBackSpace.Location = new System.Drawing.Point(48, 410);
             this.ButtonBackSpace.Name = "ButtonBackSpace";
             this.ButtonBackSpace.Size = new System.Drawing.Size(156, 61);
             this.ButtonBackSpace.TabIndex = 16;
@@ -214,13 +215,23 @@
             this.Display.Name = "Display";
             this.Display.Size = new System.Drawing.Size(351, 56);
             this.Display.TabIndex = 18;
-            this.Display.TextChanged += new System.EventHandler(this.Display_TextChanged);
+            // 
+            // btnEnter
+            // 
+            this.btnEnter.Location = new System.Drawing.Point(210, 410);
+            this.btnEnter.Name = "btnEnter";
+            this.btnEnter.Size = new System.Drawing.Size(156, 61);
+            this.btnEnter.TabIndex = 19;
+            this.btnEnter.Text = "Enter";
+            this.btnEnter.UseVisualStyleBackColor = true;
+            this.btnEnter.Click += new System.EventHandler(this.btnEnter_Click);
             // 
             // Calculator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(426, 520);
+            this.ClientSize = new System.Drawing.Size(426, 521);
+            this.Controls.Add(this.btnEnter);
             this.Controls.Add(this.Display);
             this.Controls.Add(this.ButtonBackSpace);
             this.Controls.Add(this.ButtonClear);
@@ -265,6 +276,7 @@
         private System.Windows.Forms.Button ButtonClear;
         private System.Windows.Forms.Button ButtonBackSpace;
         private System.Windows.Forms.TextBox Display;
+        private System.Windows.Forms.Button btnEnter;
     }
 }
 
