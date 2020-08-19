@@ -69,7 +69,9 @@ namespace Calculator
                             if (Convert.ToInt32(num2) == 0)
                             {
                                 MessageBox.Show("can't divide by zero");
-                                i = oprt1.Length;
+                                i = oprt1.Length; // stop the loop
+                                
+                                //break; // 'break' doesn't stop the loop
                             }
                             else
                             {
